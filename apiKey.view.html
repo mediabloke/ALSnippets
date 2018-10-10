@@ -1,0 +1,58 @@
+<!--Generate API Keys-->
+
+<script src="apiKey.state.js"></script>
+<div class="right-side">
+    <div id="apikey-tab" class="tab-container">
+        <div class="tab-page">
+            <div class="tab-page-content">
+
+                <!--Button for creating key-->
+
+
+                <div class="action-buttons">
+                    <button class="btn btn-default" ng-click="vm.createApiKey()">Create New Key</button>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <h4 class="window-header">API Keys</h4>
+                <hr>
+
+                <table class="table table-condensed" style="margin-top: -0.5em;">
+                    <thead>
+                    <tr>
+                        <td colspan="2">Active API Keys</td>
+                    </tr>
+                    </thead>
+                </table>
+
+
+                <table class="table table-condensed" ts-wrapper>
+                    <thead>
+                    <tr>
+                        <th>Key Value</th>
+                        <th ts-criteria="expireTimestamp|lowercase" ts-filter>Expires</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <!--Display current API keys for logged in tenant-->
+
+                    <tbody>
+                    <tr ng-repeat="key in apiKeys" ts-repeat>
+                        <td id="api-table-first" ng-click="vm.displayApiKeyValue(key)">{{key.token}}</td>
+                        <td>{{key.expireTimestamp | date: 'yyyy/MM/dd'}}</td>
+
+                        <!--Allow tenant to delete keys-->
+
+                        <td id="api-table-third">
+                            <a href="javascript:void(0);" ng-click="vm.disableApiKey(key)"
+                               class="btn btn-danger">Remove</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
